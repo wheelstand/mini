@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '&2+c1cia8==!26oc&9xetuv^p9g#2(d_w+9*aht_4-7mjt*do2'
+SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -89,10 +89,10 @@ WSGI_APPLICATION = 'mini.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'db_mini',
-        'USER': 'pg_mini',
-        'PASSWORD': 'wh33ler!',
-        'HOST':'159.203.25.133',
+        'NAME': '',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST':'',
         'PORT': '5432',
     }
 }
