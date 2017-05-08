@@ -1,5 +1,5 @@
 from ..models import Models, Trim, ModelsShown, FeaturesAccessory, \
-    Exterior, Upholstery, Wheel, Package, Option, Location, TrimEnImage, TrimFrImage, Gallery, Interior, Performance, Colour, Information, TestDrive # KeepingInTouch
+    Exterior, Upholstery, Wheel, Package, Option, Location, TrimEnImage, TrimFrImage, Gallery, Interior, Performance, Colour, Information, TestDrive, KeepingInTouch, StaticModelEN, StaticModelFR, StaticModel, StandAloneOption, OptionalEquipment
 from rest_framework import viewsets, generics
 from serializers import ModelsSerializer, TrimSerializer, ModelsShownSerializer, \
     FeaturesAccessorySerializer, ExteriorSerializer, \
@@ -7,7 +7,7 @@ from serializers import ModelsSerializer, TrimSerializer, ModelsShownSerializer,
     UserSerializer, GroupSerializer, WheelImageSerializer, PackageImageSerializer,\
     FeaturesAccessoryImageSerializer, UpholsteryImageSerializer, \
     ModelsShownImageSerializer, TrimEnSerializer, TrimFrSerializer, \
-    TrimEnImageSerializer, TrimFrImageSerializer, GallerySerializer, GalleryImageSerializer, InteriorSerializer, PerformanceSerializer, ColourSerializer, UpholsterySerializer, InformationSerializer, TestDriveSerializer # KeepingInTouchSerializer
+    TrimEnImageSerializer, TrimFrImageSerializer, GallerySerializer, GalleryImageSerializer, InteriorSerializer, PerformanceSerializer, ColourSerializer, UpholsterySerializer, InformationSerializer, TestDriveSerializer, KeepingInTouchSerializer, StaticModelSerializer, StaticModelImageSerializer, StaticModelImageFRSerializer, StandAloneOptionSerializer, ModelsShownFRImageSerializer, OptionalEquipmentSerializer
 from django.contrib.auth.models import User, Group
 from drf_multiple_model.views import MultipleModelAPIView
 
@@ -54,7 +54,7 @@ class PerformanceViewSet(viewsets.ModelViewSet):
 
 class ColoursViewSet(viewsets.ModelViewSet):
     queryset = Colour.objects.all()
-    serializer_class = ColourSerializer    
+    serializer_class = ColourSerializer
 
 
 class UpholsteryViewSet(viewsets.ModelViewSet):
@@ -71,6 +71,10 @@ class PackageViewSet(viewsets.ModelViewSet):
     queryset = Package.objects.all()
     serializer_class = PackageSerializer
 
+
+class StandAloneOptionViewSet(viewsets.ModelViewSet):
+    queryset = StandAloneOption.objects.all()
+    serializer_class = StandAloneOptionSerializer
 
 #class OptionViewSet(viewsets.ModelViewSet):
 #    queryset = Option.objects.all()
@@ -106,11 +110,16 @@ class TestDriveList(generics.ListCreateAPIView):
     queryset = TestDrive.objects.all()
     serializer_class = TestDriveSerializer
 
-'''
+
 class KeepingInTouchList(generics.ListCreateAPIView):
     queryset = KeepingInTouch.objects.all()
     serializer_class = KeepingInTouchSerializer
-'''    
+
+
+class OptionalEquipmentViewSet(viewsets.ModelViewSet):
+    queryset = StandAloneOption.objects.all()
+    serializer_class = StandAloneOptionSerializer
+
 
 class AllAPIView(MultipleModelAPIView):
     objectify = True
@@ -127,10 +136,12 @@ class AllAPIView(MultipleModelAPIView):
         (Package.objects.all(), PackageSerializer),
 #        (Option.objects.all(), OptionSerializer),
         (Location.objects.all(), LocationSerializer),
-        (Gallery.objects.all(), GallerySerializer),  
+        (Gallery.objects.all(), GallerySerializer),
 #        (Interior.objects.all(), InteriorSerializer),
 #        (Performance.objects.all(), PerformanceSerializer),
-        (Colour.objects.all(), ColourSerializer),        
+        (Colour.objects.all(), ColourSerializer),
+        (StandAloneOption.objects.all(), StandAloneOptionSerializer),
+        (OptionalEquipment.objects.all(), OptionalEquipmentSerializer),
     ]
 
 
@@ -139,9 +150,12 @@ class AllAPIImagesView(MultipleModelAPIView):
     add_model_type = False
 
     queryList = [
+        (StaticModel.objects.all(), StaticModelImageFRSerializer),
+        (StaticModel.objects.all(), StaticModelImageSerializer),
         (TrimEnImage.objects.all(), TrimEnImageSerializer),
         (TrimFrImage.objects.all(), TrimFrImageSerializer),
         (ModelsShown.objects.all(), ModelsShownImageSerializer),
+        (ModelsShown.objects.all(), ModelsShownFRImageSerializer),
         (Upholstery.objects.all(), UpholsteryImageSerializer),   
         (FeaturesAccessory.objects.all(), FeaturesAccessoryImageSerializer),
         (Package.objects.all(), PackageImageSerializer),

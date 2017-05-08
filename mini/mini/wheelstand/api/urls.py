@@ -29,7 +29,7 @@ urlpatterns = [
     url(r'^', include(router.urls)),
     url(r'^information/$', views.InformationList.as_view()),
     url(r'^testdrive/$', views.TestDriveList.as_view()),    
-#    url(r'^keepingintouch/$', views.KeepingInTouchList.as_view()),              
+    url(r'^keepingintouch/$', views.KeepingInTouchList.as_view()),
     url('^allapi/$', views.AllAPIView.as_view()),
     url('^allapiimages/$', views.AllAPIImagesView.as_view()),    
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
